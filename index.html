@@ -51,6 +51,9 @@
       border-radius: 5px;
       cursor: pointer;
     }
+    .g-recaptcha {
+      margin-top: 15px;
+    }
   </style>
 </head>
 <body>
@@ -68,13 +71,18 @@
       <input type="password" id="password" name="password" required>
     </div>
 
+    <!-- ReCAPTCHA v2 widget -->
+    <div class="form-group">
+      <div class="g-recaptcha" data-sitekey="6Lcf2ZEqAAAAADWC8_Npn4G3g0PMYmhtU91_uTK2"></div>
+    </div>
+
     <div class="form-group">
       <button type="submit">Sign In</button>
     </div>
   </form>
 </div>
 
-<script src="https://www.google.com/recaptcha/api.js?render=6Ler1ZEqAAAAAKEIVbZqhGbBi7QbmiQ7rbk-esiB"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 <script>
   function validateForm() {
@@ -82,25 +90,21 @@
     const password = document.getElementById("password").value;
     const errorMessage = document.getElementById("error-message");
 
-    
-    grecaptcha.execute('6Ler1ZEqAAAAAKEIVbZqhGbBi7QbmiQ7rbk-esiB', { action: 'submit' })
-      .then(function (token) {
-        // You should send the token to your server for validation
-        if (username === "joebertuniversity.com" && password === "favor123") {
-          errorMessage.style.display = "none";
-          // You can send the token to your server and validate it
-          // For now, let's simulate a successful login
-          window.location.href = "Fistpage.html"; // Ensure the URL is correct
-        } else {
-          errorMessage.style.display = "block";
-        }
-      })
-      .catch(function (error) {
-        alert("ReCAPTCHA verification failed.");
-        return false;
-      });
+    // Get the ReCAPTCHA response token
+    const recaptchaResponse = grecaptcha.getResponse();
+    if (!recaptchaResponse) {
+      alert("Please verify you're not a robot.");
+      return false; 
+    }
 
-    return false;
+    if (username === "joebertuniversity.com" && password === "favor123") {
+      errorMessage.style.display = "none";
+      window.location.href = "Fistpage.html";  // Make sure this page exists
+      return true;  
+    } else {
+      errorMessage.style.display = "block";
+      return false; 
+    }
   }
 </script>
 
