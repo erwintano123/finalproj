@@ -86,27 +86,29 @@
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 <script>
-  function validateForm() {
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
-    const errorMessage = document.getElementById("error-message");
+ function validateForm() {
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
+  const errorMessage = document.getElementById("error-message");
 
-    // Get the ReCAPTCHA response token
-    const recaptchaResponse = grecaptcha.getResponse();
-    if (!recaptchaResponse) {
-      alert("Please verify you're not a robot.");
-      return false; 
-    }
+  // Get the ReCAPTCHA response token
+  const recaptchaResponse = grecaptcha.getResponse();
+  console.log("ReCAPTCHA response:", recaptchaResponse); 
 
-    if (username === "joebertuniversity.com" && password === "favor123") {
-      errorMessage.style.display = "none";
-      window.location.href = "Fistpage.html";  // Ensure this page exists
-      return true;  
-    } else {
-      errorMessage.style.display = "block";
-      return false; 
-    }
+  if (!recaptchaResponse) {
+    alert("Please verify you're not a robot.");
+    return false; 
   }
+
+  if (username === "joebertuniversity.com" && password === "favor123") {
+    errorMessage.style.display = "none";
+    window.location.href = "Fistpage.html"; 
+    return true;  
+  } else {
+    errorMessage.style.display = "block";
+    return false; 
+  }
+}
 </script>
 
 </body>
