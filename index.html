@@ -52,7 +52,7 @@
       cursor: pointer;
     }
     .g-recaptcha {
-      margin-bottom: 15px; /* Adjust spacing for CAPTCHA above the form */
+      margin-top: 15px;
     }
   </style>
 </head>
@@ -61,13 +61,7 @@
 <div class="form-container">
   <h2>Sign In</h2>
   <div id="error-message" class="error-message">Invalid username or password.</div>
-
-  <!-- ReCAPTCHA v2 widget (Checkbox) placed above the form -->
   <form id="signInForm" onsubmit="return validateForm()">
-    <div class="form-group">
-      <div class="g-recaptcha" data-sitekey="6Lcf2ZEqAAAAADWC8_Npn4G3g0PMYmhtU91_uTK2"></div>
-    </div>
-
     <div class="form-group">
       <label for="username">Username</label>
       <input type="text" id="username" name="username" required>
@@ -76,6 +70,11 @@
       <label for="password">Password</label>
       <input type="password" id="password" name="password" required>
     </div>
+    
+    <!-- CAPTCHA section moved here -->
+    <div class="form-group">
+      <div id="recaptcha-container"></div>
+    </div>
 
     <div class="form-group">
       <button type="submit">Sign In</button>
@@ -83,32 +82,37 @@
   </form>
 </div>
 
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
-
+<script src="https://www.google.com/recaptcha/api.js?render=explicit" async defer></script>
 <script>
- function validateForm() {
-  const username = document.getElementById("username").value;
-  const password = document.getElementById("password").value;
-  const errorMessage = document.getElementById("error-message");
-
-  // Get the ReCAPTCHA response token
-  const recaptchaResponse = grecaptcha.getResponse();
-  console.log("ReCAPTCHA response:", recaptchaResponse); 
-
-  if (!recaptchaResponse) {
-    alert("Please verify you're not a robot.");
-    return false; 
+  var recaptcha;
+  function renderRecaptcha() {
+    recaptcha = grecaptcha.render('recaptcha-container', {
+      'sitekey':'6Lcf2ZEqAAAAADWC8_Npn4G3g0PMYmhtU91_uTK2'
+    });
   }
 
-  if (username === "joebertuniversity.com" && password === "favor123") {
-    errorMessage.style.display = "none";
-    window.location.href = "Fistpage.html"; 
-    return true;  
-  } else {
-    errorMessage.style.display = "block";
-    return false; 
+  window.onload = renderRecaptcha;
+
+  function validateForm() {
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+    const errorMessage = document.getElementById("error-message");
+
+    const recaptchaResponse = grecaptcha.getResponse();
+    if (!recaptchaResponse) {
+      alert("Please verify you're not a robot.");
+      return false; 
+    }
+
+    if (username === "joebertuniversity.com" && password === "favor123") {
+      errorMessage.style.display = "none";
+      window.location.href = "Fistpage.html";
+      return true;  
+    } else {
+      errorMessage.style.display = "block";
+      return false; 
+    }
   }
-}
 </script>
 
 </body>
