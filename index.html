@@ -93,31 +93,33 @@
 
   window.onload = renderRecaptcha;
 
-  function validateForm() {
+function validateForm() {
   const username = document.getElementById("username").value;
   const password = document.getElementById("password").value;
   const errorMessage = document.getElementById("error-message");
 
-  console.log("Username: ", username);  // Debugging log
-  console.log("Password: ", password);  // Debugging log
-
-  const recaptchaResponse = grecaptcha.getResponse();
-  if (!recaptchaResponse) {
+  if (!validateCaptcha()) {
     alert("Please verify you're not a robot.");
     return false; 
   }
 
   if (username === "joebertuniversity.com" && password === "favor123") {
     errorMessage.style.display = "none";
-    console.log("Successful login, redirecting...");  // Debugging log
     window.location.href = "Fistpage.html";
     return true;  
   } else {
     errorMessage.style.display = "block";
-    console.log("Invalid credentials");  // Debugging log
     return false; 
   }
 }
+
+function renderRecaptcha() {
+  recaptcha = grecaptcha.render('recaptcha-container', {
+    'sitekey': '6Lcf2ZEqAAAAADWC8_Npn4G3g0PMYmhtU91_uTK2'
+  });
+  console.log("reCAPTCHA rendered successfully.");  // Debugging log
+}
+
 </script>
 
 </body>
