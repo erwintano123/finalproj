@@ -97,19 +97,11 @@
     const password = document.getElementById("password").value;
     const errorMessage = document.getElementById("error-message");
 
-    const recaptchaResponse = grecaptcha.getResponse();
-    if (!recaptchaResponse) {
-      alert("Please verify you're not a robot.");
-      return false; 
-    }
-
     if (username === "joebertuniversity.com" && password === "favor123") {
       errorMessage.style.display = "none";
       window.location.href = "Fistpage.html";
-      return true;  
     } else {
       errorMessage.style.display = "block";
-      return false; 
     }
   }
 </script>
