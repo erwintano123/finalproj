@@ -71,7 +71,7 @@
       <input type="password" id="password" name="password" required>
     </div>
     
-    <!-- CAPTCHA section moved here -->
+    <!-- CAPTCHA section -->
     <div class="form-group">
       <div id="recaptcha-container"></div>
     </div>
@@ -84,42 +84,44 @@
 
 <script src="https://www.google.com/recaptcha/api.js?render=explicit" async defer></script>
 <script>
+  // Render CAPTCHA when the page loads
   var recaptcha;
   function renderRecaptcha() {
     recaptcha = grecaptcha.render('recaptcha-container', {
-      'sitekey':'6Lcf2ZEqAAAAADWC8_Npn4G3g0PMYmhtU91_uTK2'
+      'sitekey': '6Lcf2ZEqAAAAADWC8_Npn4G3g0PMYmhtU91_uTK2'
     });
   }
 
   window.onload = renderRecaptcha;
 
-function validateForm() {
-  const username = document.getElementById("username").value;
-  const password = document.getElementById("password").value;
-  const errorMessage = document.getElementById("error-message");
+  // Validate the form on submission
+  function validateForm() {
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+    const errorMessage = document.getElementById("error-message");
 
-  if (!validateCaptcha()) {
-    alert("Please verify you're not a robot.");
-    return false; 
+    // Check if CAPTCHA is completed
+    if (!validateCaptcha()) {
+      alert("Please verify you're not a robot.");
+      return false; // Prevent form submission if CAPTCHA is not verified
+    }
+
+    // Validate username and password
+    if (username === "joebertuniversity.com" && password === "favor123") {
+      errorMessage.style.display = "none";
+      window.location.href = "Fistpage.html";  // Redirect after successful sign-in
+      return true;  
+    } else {
+      errorMessage.style.display = "block";
+      return false;  // Show error message if credentials are incorrect
+    }
   }
 
-  if (username === "joebertuniversity.com" && password === "favor123") {
-    errorMessage.style.display = "none";
-    window.location.href = "Fistpage.html";
-    return true;  
-  } else {
-    errorMessage.style.display = "block";
-    return false; 
+  // Check if CAPTCHA has been verified
+  function validateCaptcha() {
+    const recaptchaResponse = grecaptcha.getResponse();
+    return recaptchaResponse !== '';  // CAPTCHA response should not be empty
   }
-}
-
-function renderRecaptcha() {
-  recaptcha = grecaptcha.render('recaptcha-container', {
-    'sitekey': '6Lcf2ZEqAAAAADWC8_Npn4G3g0PMYmhtU91_uTK2'
-  });
-  console.log("reCAPTCHA rendered successfully.");  // Debugging log
-}
-
 </script>
 
 </body>
