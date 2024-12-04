@@ -94,25 +94,30 @@
   window.onload = renderRecaptcha;
 
   function validateForm() {
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
-    const errorMessage = document.getElementById("error-message");
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
+  const errorMessage = document.getElementById("error-message");
 
-    const recaptchaResponse = grecaptcha.getResponse();
-    if (!recaptchaResponse) {
-      alert("Please verify you're not a robot.");
-      return false; 
-    }
+  console.log("Username: ", username);  // Debugging log
+  console.log("Password: ", password);  // Debugging log
 
-    if (username === "joebertuniversity.com" && password === "favor123") {
-      errorMessage.style.display = "none";
-      window.location.href = "Fistpage.html";
-      return true;  
-    } else {
-      errorMessage.style.display = "block";
-      return false; 
-    }
+  const recaptchaResponse = grecaptcha.getResponse();
+  if (!recaptchaResponse) {
+    alert("Please verify you're not a robot.");
+    return false; 
   }
+
+  if (username === "joebertuniversity.com" && password === "favor123") {
+    errorMessage.style.display = "none";
+    console.log("Successful login, redirecting...");  // Debugging log
+    window.location.href = "Fistpage.html";
+    return true;  
+  } else {
+    errorMessage.style.display = "block";
+    console.log("Invalid credentials");  // Debugging log
+    return false; 
+  }
+}
 </script>
 
 </body>
