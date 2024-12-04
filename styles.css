@@ -1,0 +1,90 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+    background-image: url('titan.jpg');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+
+h1 {
+    color: #030303; 
+    margin-bottom: 20px;
+}
+
+.panel {
+    border: 1px solid rgba(180, 25, 25, 0.5); 
+    border-radius: 15px; 
+    padding: 20px;
+    margin: 20px;
+    display: inline-block;
+    width: 220px; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.6); 
+    position: relative; 
+}
+
+.panel::before,
+.panel::after {
+    content: '';
+    position: absolute;
+    width: 30px; 
+    height: 30px; 
+    background-image: url('1234.jpg'); 
+    background-size: cover;
+}
+
+.panel::before {
+    top: -15px; 
+    left: -15px;
+}
+
+.panel::after {
+    bottom: -15px; 
+    right: -15px; 
+}
+
+h2 {
+    color: #ffcc00;
+    margin: 0;
+}
+
+button {
+    padding: 10px 15px;
+    margin-top: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px; 
+    background-color: #ffcc00; 
+    color: #000; 
+    transition: background-color 0.3s; 
+}
+
+button:hover {
+    background-color: #e6b800; 
+}
+}
+.vision-mission {
+    text-align: center;
+    margin: 20px;
+    padding: 15px;
+    background-color: #f0f8ff; 
+    border-radius: 10px;
+}
+
+.vision-mission h2 {
+    color: #004080; 
+}
+
+.vision-mission p {
+    color: #333;
+    font-size: 16px;
+}
+.highlight {
+    color: #004080; /* Main text color */
+    text-shadow: 2px 2px 4px rgba(0, 64, 128, 0.5); /* Subtle shadow for highlight effect */
+    font-weight: bold;
+}
+
