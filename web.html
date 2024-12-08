@@ -5,6 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Courses</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            width: 300px;
+            margin-top: 20px;
+        }
+
+        .button-container button {
+            width: 48%;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .back-button {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .back-button:hover {
+            background-color: #218838;
+        }
+
+        .enroll-button {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        .enroll-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
 
@@ -50,8 +84,10 @@
         <button onclick="window.location.href='course5.html'">Details</button>
     </div>
 
-    <br>
-    <button onclick="window.location.href='Fistpage.html'">Back to Home</button>
+    <div class="button-container">
+        <button class="back-button" onclick="window.location.href='Fistpage.html'">Back to Home</button>
+        <button class="enroll-button" onclick="window.location.href='enrollment.html'">Enroll Now</button>
+    </div>
 
 </body>
 </html>
