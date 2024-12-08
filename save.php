@@ -24,7 +24,9 @@ try {
     
     $stmt->execute();
     
-    echo "Enrollment successful!";
+    // Redirect to the homepage after successful enrollment
+    header("Location: index.html");  // Change 'web.html' to your homepage file
+    exit();
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
 }
