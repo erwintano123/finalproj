@@ -60,8 +60,8 @@
 
 <div class="form-container">
   <h2>Sign In</h2>
-  <div id="error-message" class="error-message">Invalid username or password.</div>
-  <form id="signInForm" onsubmit="return validateForm()">
+  <div id="error-message" class="error-message">Please complete the CAPTCHA.</div>
+  <form id="signInForm" onsubmit="return validateForm(event)">
     <div class="form-group">
       <label for="username">Username</label>
       <input type="text" id="username" name="username" required>
@@ -71,36 +71,35 @@
       <input type="password" id="password" name="password" required>
     </div>
     
-    <div class="form-group">
-      <div id="recaptcha-container"></div>
-    </div>
+    <div class="form-group g-recaptcha" data-sitekey="6Lcf2ZEqAAAAADWC8_Npn4G3g0PMYmhtU91_uTK2"></div>
 
     <div class="form-group">
-      <button type="button" onclick="validateForm()">Sign In</button>
+      <button type="submit">Sign In</button>
     </div>
   </form>
 </div>
 
-<script src="https://www.google.com/recaptcha/api.js?render=explicit" async defer></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script>
-  var recaptcha;
-  function renderRecaptcha() {
-    recaptcha = grecaptcha.render('recaptcha-container', {
-      'sitekey':'6Lcf2ZEqAAAAADWC8_Npn4G3g0PMYmhtU91_uTK2'
-    });
-  }
-
-  window.onload = renderRecaptcha;
-
-  function validateForm() {
+  function validateForm(event) {
+    event.preventDefault(); // Prevent form submission for validation
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
     const errorMessage = document.getElementById("error-message");
+    const recaptchaResponse = grecaptcha.getResponse();
+
+    if (!recaptchaResponse) {
+      errorMessage.textContent = "Please complete the CAPTCHA.";
+      errorMessage.style.display = "block";
+      return false;
+    }
 
     if (username === "joebertuniversity.com" && password === "favor123") {
       errorMessage.style.display = "none";
+      alert("Login Successful!");
       window.location.href = "Fistpage.html";
     } else {
+      errorMessage.textContent = "Invalid username or password.";
       errorMessage.style.display = "block";
     }
   }
